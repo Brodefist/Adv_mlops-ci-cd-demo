@@ -21,7 +21,7 @@ jobs:
           # Delete old notebook (ignore error if not exist)
           databricks workspace delete \
             /Workspace/Users/sachin.kumar@snp.com/GitDeployment/Job_Creation \
-            --recursive --yes || true
+            --recursive || true
       
           # Import new notebook from DBC archive
           databricks workspace import \
