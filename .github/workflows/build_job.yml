@@ -1,22 +1,22 @@
-name: Create Databricks Job
- 
+name: Run Job_Creation
+
 on:
   push:
     branches: ["main"]
- 
+
 jobs:
-  create-and-run:
+  run-job-creation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
- 
+
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
- 
+
       - name: Create and Run Job
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
           export DATABRICKS_TOKEN="dapi828505898b09f05c31fbae36860911dc-3"
-          JOB_JSON=$(databricks jobs create --json @pipeline_config/pipeline-validation-workflow.json --output json)
+          JOB_JSON=$(databricks jobs create --json @creation_job.json --output json)
           JOB_ID=$(echo "$JOB_JSON" | jq -r '.job_id')
           databricks jobs run-now "$JOB_ID"
