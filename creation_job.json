@@ -1,5 +1,5 @@
 {
-  "run_name": "Training_and_Evaluation_Run",
+  "name": "Training_and_Evaluation_Run",
   "tasks": [
     {
       "task_key": "Training",
