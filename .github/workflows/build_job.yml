@@ -20,7 +20,7 @@ jobs:
           databricks workspace import \
             /Workspace/Users/sachin.kumar@snp.com/GitDeployment/Job_Creation \
             --file Job_Creation.dbc \
-            --format JUPYTER \
+            --format DBC \
             --overwrite
           databricks jobs submit --json '{
             "run_name": "Job_Creation",
