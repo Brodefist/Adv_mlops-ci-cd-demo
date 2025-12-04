@@ -13,6 +13,9 @@ jobs:
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
 
+      - name: Upgrade Databricks SDK
+        run: pip install --upgrade databricks-sdk==0.70.0
+
       - name: Run Job_Creation notebook
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
