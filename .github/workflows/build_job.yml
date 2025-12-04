@@ -30,7 +30,7 @@ jobs:
                 "existing_cluster_id": "1124-094650-0nervcma",
                 "notebook_task": {
                   "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/GitDeployment/Job_Creation",
-                  "source": "WORKSPACE"
+                  "source": "WORKSPACE" 
                 }
               }
             ]
