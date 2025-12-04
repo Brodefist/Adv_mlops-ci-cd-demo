@@ -17,11 +17,19 @@ jobs:
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
           export DATABRICKS_TOKEN="dapi828505898b09f05c31fbae36860911dc-3"
+      
+          # Delete old notebook (ignore error if not exist)
+          databricks workspace delete \
+            /Workspace/Users/sachin.kumar@snp.com/GitDeployment/Job_Creation \
+            --recursive --yes || true
+      
+          # Import new notebook from DBC archive
           databricks workspace import \
             /Workspace/Users/sachin.kumar@snp.com/GitDeployment/Job_Creation \
             --file Job_Creation.dbc \
-            --format DBC \
-            --overwrite
+            --format DBC
+      
+          # Trigger notebook execution
           databricks jobs submit --json '{
             "run_name": "Job_Creation",
             "tasks": [
@@ -30,8 +38,11 @@ jobs:
                 "existing_cluster_id": "1124-094650-0nervcma",
                 "notebook_task": {
                   "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/GitDeployment/Job_Creation",
-                  "source": "WORKSPACE" 
+                  "source": "WORKSPACE"
                 }
               }
             ]
           }'
+        
+        
+              
