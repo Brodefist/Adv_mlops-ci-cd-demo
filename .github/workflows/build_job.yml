@@ -12,9 +12,12 @@ jobs:
 
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
-
-      - name: Run Job_Creation from JSON
+        
+      - name: Create and Run Job
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
           export DATABRICKS_TOKEN="dapi828505898b09f05c31fbae36860911dc-3"
-          databricks jobs create --json @creation_job.json
+      
+          JOB_ID=$(databricks jobs create --json @creation_job.json | jq -r '.job_id')
+          databricks jobs run-now --job-id "$JOB_ID"
+
