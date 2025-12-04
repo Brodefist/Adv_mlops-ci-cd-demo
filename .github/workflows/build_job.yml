@@ -19,7 +19,7 @@ jobs:
           export DATABRICKS_TOKEN="dapi828505898b09f05c31fbae36860911dc-3"
           databricks workspace import \
             /Workspace/Users/sachin.kumar@snp.com/GitDeployment/Job_Creation \
-            --file Job_Creation.py \
+            --file Job_Creation.dbc \
             --format JUPYTER \
             --overwrite
           databricks jobs submit --json '{
