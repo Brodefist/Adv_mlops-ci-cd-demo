@@ -17,7 +17,11 @@ jobs:
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
           export DATABRICKS_TOKEN="dapi828505898b09f05c31fbae36860911dc-3"
-          databricks workspace import Job_Creation.ipynb /Workspace/Users/sachin.kumar@snp.com/GitDeployment/Job_Creation --format JUPYTER --overwrite
+          databricks workspace import \
+            /Workspace/Users/sachin.kumar@snp.com/GitDeployment/Job_Creation \
+            --file Job_Creation.ipynb \
+            --format JUPYTER \
+            --overwrite
           databricks runs submit --json '{
             "run_name": "Job_Creation",
             "existing_cluster_id": "1124-094650-0nervcma",
