@@ -12,7 +12,7 @@ new_job = {
         {
             "task_key": "Training",
             "notebook_task": {
-                "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/Training",
+                "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/GitDeployment/Training"
                 "source": "WORKSPACE",
             },
             "existing_cluster_id": "1124-094650-0nervcma",
@@ -25,7 +25,7 @@ new_job = {
                 },
             ],
             "notebook_task": {
-                "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/Evaluation",
+                "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/GitDeployment/Evaluation"
                 "source": "WORKSPACE",
             },
             "existing_cluster_id": "1124-094650-0nervcma",
