@@ -13,25 +13,8 @@ jobs:
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
 
-      - name: Run Job_Creation notebook
+      - name: Run Job_Creation from JSON
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
-          export DATABRICKS_TOKEN="dapi828505898b09f05c31fbae36860911dc-3"
-
-          # Trigger notebook execution
-          databricks jobs submit --json '{
-            "run_name": "Job_Creation",
-            "tasks": [
-              {
-                "task_key": "job_creation",
-                "existing_cluster_id": "1124-094650-0nervcma",
-                "notebook_task": {
-                  "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/GitDeployment/Job_Creation",
-                  "source": "WORKSPACE"
-                }
-              }
-            ]
-          }'
-        
-        
-              
+          export DATABRICKS_TOKEN="${{ secrets.DATABRICKS_TOKEN }}"
+          databricks jobs submit --json @creation_job.json
