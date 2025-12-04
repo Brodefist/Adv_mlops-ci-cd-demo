@@ -17,4 +17,4 @@ jobs:
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
           export DATABRICKS_TOKEN="dapi828505898b09f05c31fbae36860911dc-3"
-          databricks jobs submit --json @creation_job.json
+          databricks jobs create --json @creation_job.json
