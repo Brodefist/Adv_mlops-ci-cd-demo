@@ -1,8 +1,8 @@
 name: CI
  
 on:
-  #push:
-    #branches: [ "main" ]  # make sure both have to be uncommented
+  push:
+    branches: [ "main" ]  # make sure both have to be uncommented
   workflow_dispatch:
  
 jobs:
