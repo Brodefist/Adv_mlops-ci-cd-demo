@@ -17,7 +17,10 @@ jobs:
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
           export DATABRICKS_TOKEN="dapi828505898b09f05c31fbae36860911dc-3"
-      
+
+          # Create job and capture ID (using "name" in JSON)
           JOB_ID=$(databricks jobs create --json @creation_job.json | jq -r '.job_id')
-          databricks jobs run-now --job-id "$JOB_ID"
+          
+          # Run the job using the ID directly (no flag)
+          databricks jobs run-now "$JOB_ID"
 
