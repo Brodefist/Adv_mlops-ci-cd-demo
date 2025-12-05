@@ -23,4 +23,3 @@ jobs:
           
           # Run the job using the ID directly (no flag)
           databricks jobs run-now "$JOB_ID"
-
