@@ -24,7 +24,7 @@ jobs:
           databricks clusters start 1124-094650-0nervcma
 
           # Wait until RUNNING
-          databricks clusters wait 1124-094650-0nervcma --timeout 10m
+          databricks clusters wait 1124-094650-0nervcma
 
       - name: Create Job in Databricks
         run: |
