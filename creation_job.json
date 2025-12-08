@@ -4,19 +4,9 @@
     {
       "task_key": "Training",
       "notebook_task": {
-        "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/Training",
+        "notebook_path": "/Workspace/Users/deni.lakamsani@snp.com/GitDeployment/git_test/Test_Notebook.ipynb",
         "source": "WORKSPACE"
       },
-      "existing_cluster_id": "1124-094650-0nervcma"
-    },
-    {
-      "task_key": "Evaluation",
-      "depends_on": [ { "task_key": "Training" } ],
-      "notebook_task": {
-        "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/Evaluation",
-        "source": "WORKSPACE"
-      },
-      "existing_cluster_id": "1124-094650-0nervcma"
+      "existing_cluster_id": "1124-095229-bom9cuxu"
     }
-  ]
 }
