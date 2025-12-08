@@ -1,8 +1,8 @@
 name: CI
  
 on:
-  #push:
-    #branches: [ "main" ]  # make sure both have to be uncommented
+  push:
+    branches: [ "main" ]  # make sure both have to be uncommented
   workflow_dispatch:
  
 jobs:
@@ -17,10 +17,10 @@ jobs:
  
     - name: Deploy repo to Azure Databricks Workspace
       run: |
-        export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
-        export DATABRICKS_TOKEN="dapid3a57493b9c391800057de63f3f43dbb-3"
+        export DATABRICKS_HOST="https://adb-1670050298591902.2.azuredatabricks.net"
+        export DATABRICKS_TOKEN="dapica208467099d1366845363dafb32d8aa-3"
         databricks workspace import-dir . \
-        /Workspace/Users/sachin.kumar@snp.com/GitDeployment \
+        /Workspace/Users/deni.lakamsani@snp.com/GitDeployment \
         --overwrite
 
        
