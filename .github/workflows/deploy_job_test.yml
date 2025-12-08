@@ -1,39 +1,25 @@
-name: Deploy & Run Databricks Job (Test)
+name: Run Job_Creation notebook
 
 on:
   push:
     branches: ["main"]
 
 jobs:
-  deploy_and_run:
+  run-notebook:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
-
-      - name: Ensure Cluster Ready
+        
+      - name: Create and Run Job
         run: |
-          export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
+          export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net/"
           export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
 
-          databricks clusters wait 1124-094650-0nervcma
-
-      - name: Create Job in Databricks
-        run: |
-          export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
-          export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
-
-          JOB_ID=$(databricks jobs create --json-file end_to_end.json | jq -r '.job_id')
-          echo "Created Job ID: $JOB_ID"
-          echo "JOB_ID=$JOB_ID" >> $GITHUB_ENV
-
-      - name: Trigger Job Run
-        run: |
-          export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
-          export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
-
-          databricks jobs run "$JOB_ID"
+          # Create job and capture ID (using "name" in JSON)
+          JOB_ID=$(databricks jobs create --json @end_to_end.json | jq -r '.job_id')
+          
+          # Run the job using the ID directly (no flag)
+          databricks jobs run-now "$JOB_ID"
