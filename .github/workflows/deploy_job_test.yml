@@ -2,8 +2,8 @@ name: Run Job_Creation notebook
 
 on:
   push:
-    paths:
-      - "end_to_end.json"
+    branches: ["main"]
+
 
 
 jobs:
