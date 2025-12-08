@@ -19,7 +19,7 @@ jobs:
           export DATABRICKS_TOKEN="dapica208467099d1366845363dafb32d8aa-3"
 
           # Create job and capture ID (using "name" in JSON)
-          JOB_ID=$(databricks jobs create --json @creation_job.json | jq -r '.job_id')
+          JOB_ID=$(databricks jobs create --json @test_job.json | jq -r '.job_id')
           
           # Run the job using the ID directly (no flag)
           databricks jobs run-now "$JOB_ID"
