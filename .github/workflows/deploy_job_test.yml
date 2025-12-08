@@ -1,0 +1,32 @@
+name: Deploy & Run Databricks Job (Test)
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy_and_run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Create Job in Databricks
+        run: |
+          export DATABRICKS_HOST="https://adb-1670050298591902.2.azuredatabricks.net"
+          export DATABRICKS_TOKEN="dapica208467099d1366845363dafb32d8aa-3"
+
+          JOB_ID=$(databricks jobs create --json-file end_to_end.json | jq -r '.job_id')
+          echo "Created Job ID: $JOB_ID"
+          echo "JOB_ID=$JOB_ID" >> $GITHUB_ENV
+
+      - name: Trigger Run
+        run: |
+          export DATABRICKS_HOST="https://adb-1670050298591902.2.azuredatabricks.net"
+          export DATABRICKS_TOKEN="dapica208467099d1366845363dafb32d8aa-3"
+
+          databricks jobs run-now --job-id "$JOB_ID"
