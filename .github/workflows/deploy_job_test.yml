@@ -20,8 +20,11 @@ jobs:
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
           export DATABRICKS_TOKEN="dapica208467099d1366845363dafb32d8aa-3"
 
-          databricks clusters start --cluster-id 1124-094650-0nervcma
-          databricks clusters wait --cluster-id 1124-094650-0nervcma --timeout 600
+          # Start cluster
+          databricks clusters start 1124-094650-0nervcma
+
+          # Wait until RUNNING
+          databricks clusters wait 1124-094650-0nervcma --timeout 10m
 
       - name: Create Job in Databricks
         run: |
@@ -32,9 +35,9 @@ jobs:
           echo "Created Job ID: $JOB_ID"
           echo "JOB_ID=$JOB_ID" >> $GITHUB_ENV
 
-      - name: Trigger Run
+      - name: Trigger Job Run
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
           export DATABRICKS_TOKEN="dapica208467099d1366845363dafb32d8aa-3"
 
-          databricks jobs run-now --job-id "$JOB_ID"
+          databricks jobs run "$JOB_ID"
