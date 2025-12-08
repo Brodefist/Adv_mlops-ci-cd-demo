@@ -18,7 +18,7 @@ jobs:
       - name: Start Cluster
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
-          export DATABRICKS_TOKEN="dapica208467099d1366845363dafb32d8aa-3"
+          export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
 
           # Start cluster
           databricks clusters start 1124-094650-0nervcma
