@@ -1,0 +1,13 @@
+{
+  "name": "Single_Notebook_Run",
+  "tasks": [
+    {
+      "task_key": "RunNotebook",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/deni.lakamsani@snp.com/GitDeployment/git_test/Test_Notebook.ipynb",
+        "source": "WORKSPACE"
+      },
+      "existing_cluster_id": "1124-095229-bom9cuxu"
+    }
+  ]
+}
