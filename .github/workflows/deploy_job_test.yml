@@ -15,21 +15,17 @@ jobs:
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
 
-      - name: Start Cluster
+      - name: Ensure Cluster Ready
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
           export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
 
-          # Start cluster
-          databricks clusters wait 1124-094650-0nervcma
-
-          # Wait until RUNNING
           databricks clusters wait 1124-094650-0nervcma
 
       - name: Create Job in Databricks
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
-          export DATABRICKS_TOKEN="dapica208467099d1366845363dafb32d8aa-3"
+          export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
 
           JOB_ID=$(databricks jobs create --json-file end_to_end.json | jq -r '.job_id')
           echo "Created Job ID: $JOB_ID"
@@ -38,6 +34,6 @@ jobs:
       - name: Trigger Job Run
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net"
-          export DATABRICKS_TOKEN="dapica208467099d1366845363dafb32d8aa-3"
+          export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
 
           databricks jobs run "$JOB_ID"
