@@ -36,10 +36,18 @@ jobs:
 
           echo "RUN_ID=$RUN_ID" >> $GITHUB_OUTPUT
 
+
       - name: Show Endpoint URL in GitHub Logs
         run: |
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net/"
           export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
-
-          OUTPUT=$(databricks jobs get-run-output ${{ steps.runjob.outputs.RUN_ID }} | jq -r '.notebook_output.result')
+      
+          # Get task run ID for Deploy_Endpoint task
+          TASK_RUN_ID=$(databricks jobs get-run ${{ steps.runjob.outputs.RUN_ID }} | jq -r '.tasks[] | select(.task_key=="Deploy_Endpoint") | .run_id')
+      
+          # Fetch only the task output
+          OUTPUT=$(databricks jobs get-run-output $TASK_RUN_ID | jq -r '.notebook_output.result')
+      
           echo "::notice title=🔗 Serving Endpoint::$OUTPUT"
+
+
