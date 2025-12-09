@@ -13,6 +13,9 @@ on:
 jobs:
   deploy-endpoint:
     runs-on: ubuntu-latest
+    env:
+      DATABRICKS_HOST: "https://adb-3960540793376249.9.azuredatabricks.net/"
+      DATABRICKS_TOKEN: "dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
 
     steps:
       - uses: actions/checkout@v4
@@ -23,8 +26,6 @@ jobs:
       - name: Create and Run Job
         id: runjob
         run: |
-          export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net/"
-          export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
 
           # Create job using deploy JSON and capture ID
           JOB_ID=$(databricks jobs create --json @deploy_endpoint.json | jq -r '.job_id')
@@ -39,8 +40,6 @@ jobs:
 
       - name: Show Endpoint URL in GitHub Logs
         run: |
-          export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net/"
-          export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
       
           # Get task run ID for Deploy_Endpoint task
           TASK_RUN_ID=$(databricks jobs get-run ${{ steps.runjob.outputs.RUN_ID }} | jq -r '.tasks[] | select(.task_key=="Deploy_Endpoint") | .run_id')
