@@ -1,7 +1,8 @@
 name: Run Job_Creation notebook
 
 on:
-  push:
+  workflow_dispatch:
+  #push:
     #branches: ["main"]
 
 
