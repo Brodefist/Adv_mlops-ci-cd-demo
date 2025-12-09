@@ -1,7 +1,7 @@
 name: Run Job_Creation notebook
 
 on:
-  #push:
+  push:
     #branches: ["main"]
 
 
