@@ -41,5 +41,5 @@ jobs:
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net/"
           export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
 
-          OUTPUT=$(databricks runs get-output ${{ steps.runjob.outputs.RUN_ID }} | jq -r '.notebook_output.result')
+          OUTPUT=$(databricks jobs get-run-output ${{ steps.runjob.outputs.RUN_ID }} | jq -r '.notebook_output.result')
           echo "::notice title=🔗 Serving Endpoint::$OUTPUT"
