@@ -1,0 +1,32 @@
+name: Deploy Model Endpoint
+
+on:
+  workflow_dispatch:
+    inputs:
+      model_name:
+        description: "Enter registered model name"
+        required: true
+      model_version:
+        description: "Enter model version to deploy"
+        required: true
+
+jobs:
+  deploy-endpoint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Create and Run Job
+        run: |
+          export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net/"
+          export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
+
+          # Create job using deploy JSON and pass parameters
+          JOB_ID=$(databricks jobs create --json @deploy_endpoint.json | jq -r '.job_id')
+
+          databricks jobs run-now "$JOB_ID" \
+            --notebook-params "{\"model_name\":\"${{ github.event.inputs.model_name }}\", \"model_version\":\"${{ github.event.inputs.model_version }}\"}"
