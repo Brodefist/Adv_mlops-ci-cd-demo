@@ -25,8 +25,14 @@ jobs:
           export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net/"
           export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
 
-          # Create job using deploy JSON and pass parameters
+          # Create job using deploy JSON and capture ID
           JOB_ID=$(databricks jobs create --json @deploy_endpoint.json | jq -r '.job_id')
 
-          databricks jobs run-now "$JOB_ID" \
-            --notebook-params "{\"model_name\":\"${{ github.event.inputs.model_name }}\", \"model_version\":\"${{ github.event.inputs.model_version }}\"}"
+          # Run job and pass model parameters through JSON body
+          databricks jobs run-now --json "{
+            \"job_id\": $JOB_ID,
+            \"notebook_params\": {
+              \"model_name\": \"${{ github.event.inputs.model_name }}\",
+              \"model_version\": \"${{ github.event.inputs.model_version }}\"
+            }
+          }"
