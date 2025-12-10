@@ -13,15 +13,35 @@ on:
 jobs:
   deploy-endpoint:
     runs-on: ubuntu-latest
-    env:
-      DATABRICKS_HOST: "https://adb-3960540793376249.9.azuredatabricks.net/"
-      DATABRICKS_TOKEN: "dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
+    #env:
+      #DATABRICKS_HOST: "https://adb-3960540793376249.9.azuredatabricks.net/"
+      #DATABRICKS_TOKEN: "dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
 
     steps:
       - uses: actions/checkout@v4
 
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+
+      - name: Get secrets from Key Vault
+        id: azurekeyvault
+        uses: azure/keyvault-secrets@v1
+        with:
+          keyvault: "mlops-databricks"
+          secrets: |
+            databricks-token
+            databricks-host
+
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
+        env:
+          DATABRICKS_HOST: ${{ steps.azurekeyvault.outputs.databricks-host }}
+          DATABRICKS_TOKEN: ${{ steps.azurekeyvault.outputs.databricks-token }}
 
       - name: Create and Run Job
         id: runjob
