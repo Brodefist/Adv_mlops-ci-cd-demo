@@ -30,18 +30,23 @@ jobs:
 
       - name: Get secrets from Key Vault
         id: azurekeyvault
-        uses: azure/keyvault-secrets@v1
+        uses: azure/CLI@v1
         with:
-          keyvault: "mlops-databricks"
-          secrets: |
-            databricks-token
-            databricks-host
+          inlineScript: |
+            echo "Fetching Databricks secrets from Key Vault..."
+            DATABRICKS_TOKEN=$(az keyvault secret show --vault-name "mlops-databricks" --name "databricks-token" --query value -o tsv)
+            echo "DATABRICKS_TOKEN=$DATABRICKS_TOKEN" >> $GITHUB_ENV
+      
+            DATABRICKS_HOST=$(az keyvault secret show --vault-name "mlops-databricks" --name "databricks-host" --query value -o tsv)
+            echo "DATABRICKS_HOST=$DATABRICKS_HOST" >> $GITHUB_ENV
+
 
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
         env:
-          DATABRICKS_HOST: ${{ steps.azurekeyvault.outputs.databricks-host }}
-          DATABRICKS_TOKEN: ${{ steps.azurekeyvault.outputs.databricks-token }}
+          DATABRICKS_HOST: ${{ env.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ env.DATABRICKS_TOKEN }}
+
 
       - name: Create and Run Job
         id: runjob
