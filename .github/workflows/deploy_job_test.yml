@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
   #push:
     #branches: ["main"]
-
+permissions:
+  id-token: write
+  contents: read
 
 
 jobs:
@@ -13,14 +15,34 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Get secrets from Key Vault
+        id: azurekeyvault
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            echo "Fetching secrets from Key Vault..."
+
+            DATABRICKS_TOKEN=$(az keyvault secret show --vault-name "mlops-databricks" --name "databricks-token" --query value -o tsv)
+            echo "DATABRICKS_TOKEN=$DATABRICKS_TOKEN" >> $GITHUB_ENV
+
+            DATABRICKS_HOST=$(az keyvault secret show --vault-name "mlops-databricks" --name "databricks-host" --query value -o tsv)
+            echo "DATABRICKS_HOST=$DATABRICKS_HOST" >> $GITHUB_ENV
+
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
-        
+        env:
+          DATABRICKS_HOST: ${{ env.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ env.DATABRICKS_TOKEN }}
+
       - name: Create and Run Job
         run: |
-          export DATABRICKS_HOST="https://adb-3960540793376249.9.azuredatabricks.net/"
-          export DATABRICKS_TOKEN="dapifffd4cf7e7f4dd37b2a317d48d41d132-3"
-
           # Create job and capture ID (using "name" in JSON)
           JOB_ID=$(databricks jobs create --json @end_to_end.json | jq -r '.job_id')
           
