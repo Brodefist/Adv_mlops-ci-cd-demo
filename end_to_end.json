@@ -15,10 +15,10 @@
       "task_key": "Data_Prep",
       "run_if": "ALL_SUCCESS",
       "notebook_task": {
-        "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/Regression/Data_Prep",
+        "notebook_path": "/Workspace/Users/deni.lakamsani@snp.com/Regression/Data_Prep",
         "source": "WORKSPACE"
       },
-      "existing_cluster_id": "1124-094650-0nervcma",
+      "existing_cluster_id": "0109-065536-lhc8lexu",
       "timeout_seconds": 0,
       "email_notifications": {},
       "webhook_notifications": {}
@@ -32,10 +32,10 @@
       ],
       "run_if": "ALL_SUCCESS",
       "notebook_task": {
-        "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/Regression/Training",
+        "notebook_path": "/Workspace/Users/deni.lakamsani@snp.com/Regression/Training",
         "source": "WORKSPACE"
       },
-      "existing_cluster_id": "1124-094650-0nervcma",
+      "existing_cluster_id": "0109-065536-lhc8lexu",
       "timeout_seconds": 0,
       "email_notifications": {},
       "webhook_notifications": {}
@@ -49,10 +49,10 @@
       ],
       "run_if": "ALL_SUCCESS",
       "notebook_task": {
-        "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/Regression/Evaluation",
+        "notebook_path": "/Workspace/Users/deni.lakamsani@snp.com/Regression/Evaluation",
         "source": "WORKSPACE"
       },
-      "existing_cluster_id": "1124-094650-0nervcma",
+      "existing_cluster_id": "0109-065536-lhc8lexu",
       "timeout_seconds": 0,
       "email_notifications": {},
       "webhook_notifications": {}
@@ -84,10 +84,10 @@
       ],
       "run_if": "ALL_SUCCESS",
       "notebook_task": {
-        "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/Regression/Register_Model",
+        "notebook_path": "/Workspace/Users/deni.lakamsani@snp.com/Regression/Register_Model",
         "source": "WORKSPACE"
       },
-      "existing_cluster_id": "1124-094650-0nervcma",
+      "existing_cluster_id": "0109-065536-lhc8lexu",
       "timeout_seconds": 0,
       "email_notifications": {},
       "webhook_notifications": {}
@@ -102,14 +102,14 @@
       ],
       "run_if": "ALL_SUCCESS",
       "notebook_task": {
-        "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/Regression/Send_Alert",
+        "notebook_path": "/Workspace/Users/deni.lakamsani@snp.com/Regression/Send_Alert",
         "source": "WORKSPACE"
       },
-      "existing_cluster_id": "1124-094650-0nervcma",
+      "existing_cluster_id": "0109-065536-lhc8lexu",
       "timeout_seconds": 0,
       "email_notifications": {
         "on_success": [
-          "sachin.kumar@snp.com"
+          "deni.lakamsani@snp.com"
         ]
       },
       "notification_settings": {
