@@ -11,14 +11,14 @@
       "task_key": "Deploy_Endpoint",
       "run_if": "ALL_SUCCESS",
       "notebook_task": {
-        "notebook_path": "/Workspace/Users/sachin.kumar@snp.com/Regression/Deploy Endpoint",
+        "notebook_path": "/Workspace/Users/deni.lakamsani@snp.com/Regression/Deploy Endpoint",
         "base_parameters": {
           "model_name": "",
           "model_version": ""
         },
         "source": "WORKSPACE"
       },
-      "existing_cluster_id": "1124-094650-0nervcma",
+      "existing_cluster_id": "0109-065536-lhc8lexu",
       "timeout_seconds": 0,
       "email_notifications": {}
     }
