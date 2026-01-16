@@ -48,8 +48,8 @@ jobs:
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
         env:
-          DATABRICKS_HOST: "https://adb-1670050298591902.2.azuredatabricks.net/"
-          DATABRICKS_TOKEN: "dapi8b2ddfc4f27157d6a50024a16cb8a898-3"
+          DATABRICKS_HOST: "https://adb-7405617328913463.3.azuredatabricks.net/"
+          DATABRICKS_TOKEN: "dapi8e962a69f227c0d49919d5c7f9a19652-3"
 
 
       - name: Create and Run Job
