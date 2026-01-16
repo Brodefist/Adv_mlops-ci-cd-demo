@@ -27,9 +27,9 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          client-id: "21d1bb81-6473-43e2-b0cb-3ef758f0f08e"
+          client-id: "86e1a431-c055-4777-9b72-792de6ca53d2"
           tenant-id: "30bf9f37-d550-4878-9494-1041656caf27"
-          subscription-id: "16ecc6d9-35a4-484d-9b1e-680d86b42731"
+          subscription-id: "84ebaad1-c588-4a4b-bf70-895ba822e20b"
 
 
       - name: Get secrets from Key Vault
@@ -38,10 +38,10 @@ jobs:
         with:
           inlineScript: |
             echo "Fetching Databricks secrets from Key Vault..."
-            DATABRICKS_TOKEN=$(az keyvault secret show --vault-name "at-keyv" --name "db-token" --query value -o tsv)
+            DATABRICKS_TOKEN=$(az keyvault secret show --vault-name "db-mlflow-keyvault" --name "db-token" --query value -o tsv)
             echo "DATABRICKS_TOKEN=$DATABRICKS_TOKEN" >> $GITHUB_ENV
       
-            DATABRICKS_HOST=$(az keyvault secret show --vault-name "at-keyv" --name "databricks-host" --query value -o tsv)
+            DATABRICKS_HOST=$(az keyvault secret show --vault-name "db-mlflow-keyvault" --name "databricks-host" --query value -o tsv)
             echo "DATABRICKS_HOST=$DATABRICKS_HOST" >> $GITHUB_ENV
 
 
